@@ -34,6 +34,9 @@ export default async function intemp() {
             await outPromises[inputFile];
             return await readFile(inputFile, "utf8");
           }
+          if (env.startsWith("https://") || env.startsWith("http://")) {
+            return await (await fetch(env)).text();
+          }
           return (
             (process.env as Record<string, string>)[env] ??
             (() => {
