@@ -13,10 +13,14 @@ export default async function intemp() {
     files.map(async (f) => {
       const cont = await readFile(f, "utf8");
       const outFile = f.replace(".intemp", "");
+      let c = 0;
+      report();
       await writeFile(
         outFile,
         cont.replace(/\${{(.*?)}}/g, (_, $1) => {
-          const env = $1.trim().replace(/^env\./, '')
+          const env = $1.trim().replace(/^env\./, "");
+          c++;
+          report();
           return (
             (process.env as Record<string, string>)[env] ??
             (() => {
@@ -25,7 +29,12 @@ export default async function intemp() {
           );
         })
       );
+      console.log("");
       return outFile;
+
+      function report() {
+        console.write(`${outFile} ${c}\r`);
+      }
     })
   );
 }
