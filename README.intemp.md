@@ -42,14 +42,6 @@ Input Files:
 
 [./README.intemp.md](./README.intemp.md)
 
-```yaml
-${{ file://./README.intemp.md }}
-```
-
-```sh
-${{ file://.env }}
-```
-
 Run:
 
 ```bash
