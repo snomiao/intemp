@@ -40,7 +40,7 @@ export default async function intemp() {
           return (
             (process.env as Record<string, string>)[env] ??
             (() => {
-              throw new Error("Missing Env: " + env);
+              throw new Error("Missing Env: " + env + " in " + f);
             })()
           );
         }
