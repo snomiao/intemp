@@ -1,6 +1,6 @@
 # Inline Templator (intemp)
 
-Fill configurations template with github-action-style inline ${{ env.CLOZE }} s.
+Fill configurations template with github-action-style inline Env or File.
 
 ## Use cases:
 
@@ -9,7 +9,8 @@ Fill configurations template with github-action-style inline ${{ env.CLOZE }} s.
 Input Files:
 
 ```yaml
-# ./config.intemp.yaml
+# config.intemp.yaml
+
 Client: GoCQHttp
 GoCQHttp:
   type: HTTP
@@ -21,20 +22,21 @@ GoCQHttp:
 ```
 
 ```sh
-# ./.env
+# .env
 ACCESS_TOKEN=icX7z8qE4GA5YRzg
 ```
 
 Run:
 
-```bash 
+```bash
 bunx intemp
 ```
 
 Output Files:
 
 ```yaml
-# ./config.yaml
+# config.yaml
+
 Client: GoCQHttp
 GoCQHttp:
   type: HTTP
@@ -44,3 +46,79 @@ GoCQHttp:
   host: 0.0.0.0
   port: 8000
 ```
+
+### README templator:
+
+Input Files:
+
+```yaml
+# Inline Templator (intemp)
+
+Fill configurations template with github-action-style inline Env or File.
+
+## Use cases:
+
+### Yaml templator:
+
+Input Files:
+
+```yaml
+# config.intemp.yaml
+${{ file://./config.intemp.yaml }}
+```
+
+```sh
+# .env
+${{ file://.env }}
+```
+
+Run:
+
+```bash
+bunx intemp
+```
+
+Output Files:
+
+```yaml
+# config.yaml
+${{ file://./config.yaml }}
+```
+
+### README templator:
+
+Input Files:
+
+```yaml
+${{ file://./README.intemp.md }}
+```
+
+```sh
+${{ file://.env }}
+```
+
+Run:
+
+```bash
+bunx intemp
+```
+
+Output Files:
+
+`./README.md` (Yes, You are reading the output of intemp.)
+
+```
+
+```sh
+ACCESS_TOKEN=icX7z8qE4GA5YRzg
+```
+
+Run:
+
+```bash
+bunx intemp
+```
+
+Output Files:
+
+`./README.md` (Yes, You are reading the output of intemp.)
