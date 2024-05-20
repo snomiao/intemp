@@ -27,13 +27,8 @@ export default async function intemp() {
           );
         })
       ); 
-      report();
-      console.log("\n");
+      console.log(`${outFile} ${c}`);
       return outFile;
-
-      function report() {
-        console.write(`${outFile} ${c}\r`);
-      }
     })
   );
 }
