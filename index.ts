@@ -15,7 +15,7 @@ export default async function intemp() {
       const outFile = f.replace(".intemp", "");
       await writeFile(
         outFile,
-        cont.replace(/\${{(.*?)}}/, (_, $1) => {
+        cont.replace(/\${{(.*?)}}/g, (_, $1) => {
           const env = $1.trim().replace(/^env\./, '')
           return (
             (process.env as Record<string, string>)[env] ??
