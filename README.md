@@ -6,35 +6,40 @@ Fill configurations template with inline ${CLOZE} s.
 
 ### Yaml templator:
 
-Input:
+Input Files:
 
 ```yaml
-# ./config.yaml
+# ./config.intemp.yaml
 Client: GoCQHttp
 GoCQHttp:
   type: HTTP
-  #$ access: ${ACCESS_TOKEN}
-  access_token: "..."
+  access_token: ${{ env.ACCESS_TOKEN }}
   api_root: http://go-cqhttp:5700/
   api_timeout: 60
   host: 0.0.0.0
   port: 8000
 ```
 
+```sh
+# ./.env
+ACCESS_TOKEN=icX7z8qE4GA5YRzg
+```
+
 Run:
 
 ```bash
-crossenv ACCESS_TOKEN=icX7z8qE4GA5YRzg intemp config.yaml
+npx intemp
+# or
+bunx intemp
 ```
 
-Output:
+Output Files:
 
 ```yaml
 # ./config.yaml
 Client: GoCQHttp
 GoCQHttp:
   type: HTTP
-  # ${access_token=ACCESS_TOKEN}
   access_token: icX7z8qE4GA5YRzg
   api_root: http://go-cqhttp:5700/
   api_timeout: 60
