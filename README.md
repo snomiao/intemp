@@ -27,9 +27,7 @@ ACCESS_TOKEN=icX7z8qE4GA5YRzg
 
 Run:
 
-```bash
-npx intemp
-# or
+```bash 
 bunx intemp
 ```
 
