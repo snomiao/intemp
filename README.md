@@ -1,6 +1,6 @@
 # Inline Templator (intemp)
 
-Fill configurations template with inline ${CLOZE} s.
+Fill configurations template with github-action-style inline ${{ env.CLOZE }} s.
 
 ## Use cases:
 

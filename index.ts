@@ -29,7 +29,7 @@ export default async function intemp() {
           );
         })
       );
-      console.log("");
+      console.log("\n");
       return outFile;
 
       function report() {
