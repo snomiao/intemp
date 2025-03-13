@@ -87,3 +87,16 @@ bunx intemp
 Output Files:
 
 `./myip.txt`
+
+
+## Learn More
+
+check [./tests](./tests) to learn more
+
+## About
+
+MIT License
+
+by snomiao@gmail.com
+
+2025
