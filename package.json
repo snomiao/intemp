@@ -6,7 +6,9 @@
     "intemp": "index.ts"
   },
   "devDependencies": {
-    "@types/bun": "^1.1.2"
+    "@types/bun": "^1.1.2",
+    "husky": "^9.1.7",
+    "semantic-release": "^24.2.3"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
@@ -23,7 +25,8 @@
     "build": "bun build . --outdir . --target=node",
     "test": "bun test",
     "prepack": "bun build . --outdir . --target=node",
-    "release": "bunx standard-version && git push --follow-tags origin main && npm publish"
+    "release": "bunx standard-version && git push --follow-tags origin main && npm publish",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
