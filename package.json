@@ -21,7 +21,7 @@
   "main": "index.js",
   "scripts": {
     "test": "bun test",
-    "prepack": "bun build . --outdir .",
+    "prepack": "bun build . --outdir . --target=node",
     "release": "bunx standard-version && git push --follow-tags origin main && npm publish"
   },
   "keywords": [],
