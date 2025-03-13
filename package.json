@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "dotenv": "^16.4.5",
-    "glob": "^10.3.15"
+    "glob": "^10.3.15",
+    "p-map": "^7.0.3"
   },
   "description": "Fill configurations template with inline ${CLOZE} s.",
   "version": "1.4.1",

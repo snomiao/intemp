@@ -1,10 +1,9 @@
 #!/usr/bin/env bun
-import path from "path";
-import { sleep } from "bun";
 import "dotenv/config";
-import { readFile } from "fs/promises";
-import { writeFile } from "fs/promises";
+import { readFile, writeFile } from "fs/promises";
 import { glob } from "glob";
+import pMap from "p-map";
+import path from "path";
 
 if (import.meta.main) await intemp();
 
@@ -13,10 +12,11 @@ export default async function intemp() {
   const outFiles = files.map((f) => outpath(f));
   console.log(outFiles);
   const outPromises = Object.fromEntries(
-    outFiles.map((outFile) => [outFile, SolvablePromise()])
+    outFiles.map((outFile) => [outFile, Promise.withResolvers()])
   );
-  return await Promise.all(
-    files.map(async (f) => {
+  return await pMap(
+    files,
+    async (f) => {
       const cont = await readFile(f, "utf8");
       const outFile = outpath(f);
       let c = 0;
@@ -31,7 +31,7 @@ export default async function intemp() {
               process.cwd(),
               env.slice("file://".length)
             );
-            await outPromises[inputFile];
+            await outPromises[inputFile].promise;
             return await readFile(inputFile, "utf8");
           }
           if (env.startsWith("https://") || env.startsWith("http://")) {
@@ -49,14 +49,15 @@ export default async function intemp() {
       outPromises[outFile].resolve();
       console.log(`${outFile} ${c}`);
       return outFile;
-    })
+    },
+    { stopOnError: false }
   );
 }
 
 function outpath(f: string): string {
   return path.relative(process.cwd(), f.replace(".intemp", ""));
 }
-
+//
 // - [javascript : Async/await in .replace - Stack Overflow]( https://stackoverflow.com/questions/33631041/javascript-async-await-in-replace )
 async function replaceAsync(
   str: string,
@@ -70,14 +71,4 @@ async function replaceAsync(
   });
   const data = await Promise.all(promises);
   return str.replace(regex, () => data.shift()!);
-}
-function SolvablePromise() {
-  const resolver = {
-    resolve: () => {
-      throw new Error("not initilized");
-      return;
-    },
-  };
-  const p = new Promise<void>((resolve) => (resolver.resolve = resolve));
-  return Object.assign(p, resolver);
 }
