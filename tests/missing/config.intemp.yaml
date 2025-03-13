@@ -1,0 +1,10 @@
+
+Client: GoCQHttp
+GoCQHttp:
+  type: HTTP
+  access_token: ${{ env.ACCESS_TOKEN_MISSING1 }}
+  access_token2: ${{ env.ACCESS_TOKEN_MISSING2 }}
+  api_root: http://go-cqhttp:5700/
+  api_timeout: 60
+  host: 0.0.0.0
+  port: 8000

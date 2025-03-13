@@ -2,13 +2,6 @@
 
 Fill configurations template with github-action-style inline Env or File.
 
-## Supported Replacement Types
-
-- FILENAME.intemp.EXT file in case filling secrets to template, and wont commit the output file.
-  ${{ env.ACCESS_TOKEN }}
-<!-- - FILENAME.EXT file in case filling non secrets to template
-  ${{ env.ACCESS_TOKEN }} -->
-
 ## Use cases:
 
 ### Yaml templator:
